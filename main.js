@@ -10,6 +10,19 @@ bot.events = new Discord.Collection();
         require(`./handlers/${handler}`)(bot, Discord);
 });
 
+bot.on("message", async message => {
+        if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) return
+        
+        let BannedWords = await db.get(`blacklisted_${message.guild.id}`)
+        if (BannedWords === null) return
+
+        if (BannedWords.some(word => message.toString().toLowerCase().includes(word))) {
+                message.delete().catch(e => console.error("couldnt delete message"));
+                const msg = await message.reply(`that word is blacklisted in here, please dont say it!`)
+                setTimeout(() => msg.delete(), 3000)
+        };
+});
+
 bot.on("message", message => {
 
         const modid = db.get(`modlogs_${message.guild.id}`)
