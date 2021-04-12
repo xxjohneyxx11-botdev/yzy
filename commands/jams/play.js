@@ -2,7 +2,7 @@ const {
     Util,
     MessageEmbed
 } = require('discord.js');
-const GOOGLE_API_KEY = 'AIzaSyAI1GLAVxobTJ0A9MWOXsP-_j35xKtvqS8'
+const GOOGLE_API_KEY = ''
 const YouTube = require("simple-youtube-api");
 const youtube = new YouTube(GOOGLE_API_KEY);
 const ytdl = require('ytdl-core');
